@@ -36,10 +36,7 @@ public class FXMLDocumentController implements Initializable {
         input_message.setText("");
         
     }
-      
-    
-   
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         

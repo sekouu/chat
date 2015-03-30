@@ -13,6 +13,7 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,15 +27,17 @@ public class MultiCastServer extends Thread {
     private DatagramPacket packet_message;
     private byte[] message_buf;
     private String text;
+    private Logger logger;
     
     
-    public MultiCastServer( InetAddress address, int port) throws IOException
+    public MultiCastServer( InetAddress address, int port, Logger logger) throws IOException
     {
         server_socket = new MulticastSocket();
         this.address = address;
         this.port = port;
         server_socket = new MulticastSocket(port);
         server_socket.joinGroup(address);
+        this.logger=logger;
     }
     
     public void run ()
@@ -51,7 +54,7 @@ public class MultiCastServer extends Thread {
                 System.out.println(text);
             }
             catch (Exception e) {
-                e.printStackTrace();
+                logger.warning(e.getMessage());
             }
         }
     }
