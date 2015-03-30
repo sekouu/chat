@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.MultiCastClient;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -20,6 +21,16 @@ import javafx.scene.control.TextField;
  */
 public class FXMLDocumentController implements Initializable {
     
+    
+    
+    private  MultiCastClient client;
+    
+     public void setClient(MultiCastClient client) {
+       
+         this.client = client;
+        
+         
+    }
     @FXML
     private Label label;
      @FXML
@@ -29,10 +40,12 @@ public class FXMLDocumentController implements Initializable {
     
   
     @FXML
-      private void clickButtonAction(ActionEvent event) {
-      
-        System.out.println(input_message.getText());
-        output_message.appendText(input_message.getText() + "\n");
+      private void clickButtonAction(ActionEvent event) throws Exception {
+          
+        System.out.println(input_message.getText());  
+        client.sendMessage(input_message.getText());
+        
+        output_message.appendText(client.getText() + "\n");
         input_message.setText("");
         
     }
@@ -45,5 +58,7 @@ public class FXMLDocumentController implements Initializable {
         
       
     }    
+
+   
     
 }

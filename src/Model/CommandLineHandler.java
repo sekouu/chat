@@ -64,7 +64,7 @@ public class CommandLineHandler {
                 System.out.println(" -a, --address      set the IP address\n");
                 System.out.println(" -h, --help         display this help and quit\n");
                 System.out.println(" -n, --nio          use NIOs for the server\n");
-                System.out.println("-m, --multicast     start the client en multicast mode");
+                System.out.println("-m, --multicast     start the client en multicast mode\n");
                 System.out.println(" -p, --port         set the port\n");
                 System.out.println(" -s, --server       start the server\n");
                 System.out.println("-c,  --client       Open a window");
@@ -98,7 +98,7 @@ public class CommandLineHandler {
                 break;
             case 'c':
                 System.out.println("Opening a window");
-                ChatWindow window = new ChatWindow();
+                ChatWindow window = new ChatWindow(m_client);
                 window.main(args);
                 break;
                  

@@ -42,7 +42,10 @@ public class MultiCastClient extends Thread {
         
         
     }
-    
+    public MultiCastClient()
+    {
+        
+    }
     public void run ()
     {
        BufferedReader client_input;

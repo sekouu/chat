@@ -24,7 +24,7 @@ import java.util.Set;
  *
  * @author Sekou
  */
-public class NServer extends AbstractMultichatServer implements MultichatServer {
+public class NServer extends AbstractMultichatServer {
     
     private InetAddress bindAddress;
     private int port;
@@ -53,7 +53,7 @@ public class NServer extends AbstractMultichatServer implements MultichatServer 
     }
 
 
-    @Override
+    
     public void start() {
         try {
             while(true)
