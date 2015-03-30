@@ -41,8 +41,8 @@ public class Server {
     {
        this.bindAddress = bindAddress;
        this.port = port;
-       this.client_list = new HashMap<>();
-       this.nickname_list = new HashMap<>();
+       this.client_list = new HashMap();
+       this.nickname_list = new HashMap();
       
     }
     

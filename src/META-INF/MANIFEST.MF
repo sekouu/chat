@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Class-Path: java-getopt-1.0.9.jar
+Main-Class: Controller.Chat
+

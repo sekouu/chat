@@ -35,12 +35,10 @@ public class MultiCastServer extends Thread {
         this.port = port;
         server_socket = new MulticastSocket(port);
         server_socket.joinGroup(address);
-    
     }
     
     public void run ()
     {
-      
         ByteArrayInputStream reader;
         
         while (true)
@@ -56,10 +54,5 @@ public class MultiCastServer extends Thread {
                 e.printStackTrace();
             }
         }
-        
     }
-     
-    
-    
-    
 }
