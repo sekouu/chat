@@ -6,11 +6,13 @@
 
 package Model;
 
+import View.ChatWindow;
 import gnu.getopt.Getopt;
 import gnu.getopt.LongOpt;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Scanner;
 
 
 
@@ -18,15 +20,18 @@ import java.net.UnknownHostException;
  *
  * @author Sekou
  */
+
+
 public class CommandLineHandler {
     LongOpt[] longopts = new LongOpt[5];
     StringBuffer sb = new StringBuffer();
     NServer nio_server;
     Server s_server;
+    MultiCastClient m_client;
     int port;
     InetAddress address;
-    
-    
+    String nickname; 
+    Scanner sc = new Scanner(System.in);
     
     
     public CommandLineHandler()
@@ -42,10 +47,10 @@ public class CommandLineHandler {
     longopts[3] = new LongOpt("port", LongOpt.REQUIRED_ARGUMENT , sb, 'p');
     longopts[4] = new LongOpt("server", LongOpt.NO_ARGUMENT , null, 's');
     
-    Getopt g = new Getopt("Chat", args, "a:hncp:s", longopts);
+    Getopt g = new Getopt("Chat", args, "a:hncmp:s", longopts);
     int c ;
     int server_mode = 0; // if the server is used as a  normal socket, the value is 0 nio mode is 1
-       
+     
     while ((c = g.getopt()) != -1){
         
         switch (c){
@@ -59,6 +64,7 @@ public class CommandLineHandler {
                 System.out.println(" -a, --address      set the IP address\n");
                 System.out.println(" -h, --help         display this help and quit\n");
                 System.out.println(" -n, --nio          use NIOs for the server\n");
+                System.out.println("-m, --multicast     start the client en multicast mode");
                 System.out.println(" -p, --port         set the port\n");
                 System.out.println(" -s, --server       start the server\n");
                 System.out.println("-c,  --client       Open a window");
@@ -74,6 +80,13 @@ public class CommandLineHandler {
                 System.out.println("Port number used : "+ g.getOptarg());
                 port =Integer.parseInt( g.getOptarg());
                 break;
+            case 'm' :
+                System.out.println("Nickname :");
+                nickname = sc.nextLine();
+                
+                m_client = new MultiCastClient(address, port, nickname);
+                m_client.start();
+                break;
             case 's':
                 System.out.println("Server activated ");
                 if (server_mode == 1)
@@ -85,11 +98,14 @@ public class CommandLineHandler {
                 break;
             case 'c':
                 System.out.println("Opening a window");
+                ChatWindow window = new ChatWindow();
+                window.main(args);
                 break;
                  
                 
             default:
                 System.out.println("Invalid option");
+            
         }
     }
     

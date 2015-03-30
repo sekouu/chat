@@ -39,14 +39,12 @@ public class Chat {
         Server server = new Server( address, port );
         server.start();
         */
-        
+        /*
         InetAddress group_address = InetAddress.getByName("228.0.0.4");
-        MultiCastServer server = new MultiCastServer(group_address, 45000);
-        server.start();
-        Thread.sleep(5000);
+        
         MultiCastClient client = new MultiCastClient(group_address, 45000, "Sekou");
         client.start();
-        /*
+        */
         CommandLineHandler command = new CommandLineHandler();
         command.command(args);
         /*

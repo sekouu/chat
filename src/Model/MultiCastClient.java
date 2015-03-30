@@ -6,7 +6,9 @@
 package Model;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -27,6 +29,8 @@ public class MultiCastClient extends Thread {
     private int port;
     private DatagramPacket packet_message;
     private String nickname;
+      private byte[] message_buf;
+    private String text;
     
     public MultiCastClient( InetAddress address, int port, String nick) throws IOException
     {
@@ -44,17 +48,28 @@ public class MultiCastClient extends Thread {
        BufferedReader client_input;
             try {
        client_input = new BufferedReader(new InputStreamReader(System.in));
+       
+       new Thread (new IncomingMessage()).start();
+       
        while(true) {
-			  String texte = client_input.readLine();
-			  sendMessage(texte);
+                         
+                          String texte = client_input.readLine();
+			
+                             
+                              sendMessage(texte);
+                       
+                          }
+                          
+                          
+                                             
        }
-    }
+    
     catch (Exception e) {
        e.printStackTrace();
     }
-  } 
-
-  void sendMessage(String text) throws Exception {
+    }
+  
+  public void sendMessage(String text) throws Exception {
 		byte[] contenuMessage;
 		DatagramPacket message;
 	
@@ -66,6 +81,40 @@ public class MultiCastClient extends Thread {
 		message = new DatagramPacket(contenuMessage, contenuMessage.length, address, port);
 		client_socket.send(message);
   }
+  
+  public String getText()
+  {
+      return text;
+  }
+  private class IncomingMessage extends Thread{
+    
+      public void IncomingMessage()
+  {
+   
+  }
+      public void run()
+      {
+          while (true)
+       {
+            message_buf = new byte[512];
+            packet_message = new DatagramPacket(message_buf, message_buf.length);
+            try {
+                client_socket.receive(packet_message);
+                text = (new DataInputStream(new ByteArrayInputStream(message_buf))).readUTF();
+                System.out.println(text);
+                
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+       }
+          
+      }
+  }
+  
+  
+  
+  
 }
     
     
