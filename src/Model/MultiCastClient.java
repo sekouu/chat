@@ -50,11 +50,9 @@ public class MultiCastClient extends Thread {
             new Thread(new IncomingMessage()).start();
 
             while (true) {
-
                 String texte = client_input.readLine();
                 sendMessage(texte);
             }
-
 
         } catch (Exception e) {
             logger.warning(e.getMessage());

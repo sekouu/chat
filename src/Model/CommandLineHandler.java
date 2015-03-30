@@ -97,14 +97,14 @@ public class CommandLineHandler {
 
                 case 'p':
                     System.out.println("Port number used : " + g.getOptarg());
-                    logger.info("setting port at " + g.getOptarg());
+                    logger.info("Setting port at " + g.getOptarg());
                     port = Integer.parseInt(g.getOptarg());
                     break;
 
                 case 'm':
                     System.out.println("Nickname :");
                     nickname = sc.nextLine();
-                    logger.info("Nickname set a " + nickname);
+                    logger.info("Nickname set as " + nickname);
                     try {
                         m_client = new MultiCastClient(address, port, nickname, logger);
                         m_client.start();
