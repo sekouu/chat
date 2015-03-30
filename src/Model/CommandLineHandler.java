@@ -73,6 +73,7 @@ public class CommandLineHandler {
 
                 case 'h':
                     System.out.println(bundle.getString("help"));
+                    System.out.println(bundle.getString("usage"));
                     System.out.println(bundle.getString("-a"));
                     System.out.println(bundle.getString("-d"));
                     System.out.println(bundle.getString("-h"));
