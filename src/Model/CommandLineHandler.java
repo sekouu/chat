@@ -56,7 +56,7 @@ public class CommandLineHandler {
         int server_mode = 0; // if the server is used as a  normal socket, the value is 0 nio mode is 1
 
         //Languages keep
-        ResourceBundle bundle = ResourceBundle.getBundle("bundles.ApplicationBundle", Locale.FRENCH);
+        ResourceBundle bundle = ResourceBundle.getBundle("bundles.ApplicationBundle", Locale.getDefault());
 
         while ((c = g.getopt()) != -1) {
 
